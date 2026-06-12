@@ -10,10 +10,6 @@ class Catigory(BaseModel):
     def __str__(self):
         return self.name
     
-    def to_dict(self):
-        return {
-            'name': self.name
-        }
     
     def get_icon(self):
         return mark_safe(self.icon)
@@ -29,15 +25,7 @@ class Product(BaseModel):
     def __str__(self):
         return self.name
     
-    def to_dict(self):
-        return {
-            'name': self.name,
-            'disc': self.disc,
-            'price': self.price,
-            'catigory': self.catigory.to_dict()
-            
-        }
-        
+
 
 
 
