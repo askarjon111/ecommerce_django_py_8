@@ -1,16 +1,22 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.generics import RetrieveAPIView
 
 from apps.orders.api_endpoints.orders.OrderDetail.serializers import OrderDetailSerializer
 from apps.orders.models import Order
 
 
-@api_view(['GET'])
-def order_detail_view(request, pk):
-    try:
-        order = Order.objects.get(pk=pk)
-    except Order.DoesNotExist:
-        return Response({'error': 'Order not found'}, status=404)
+# @api_view(['GET'])
+# def order_detail_view(request, pk):
+#     try:
+#         order = Order.objects.get(pk=pk)
+#     except Order.DoesNotExist:
+#         return Response({'error': 'Order not found'}, status=404)
 
-    serializer = OrderDetailSerializer(order)
-    return Response(serializer.data)
+#     serializer = OrderDetailSerializer(order)
+#     return Response(serializer.data)
+
+
+class OrderDetailAPIView(RetrieveAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderDetailSerializer
